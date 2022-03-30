@@ -16,7 +16,7 @@ import {createComponentType} from '../view/compiler';
 import {ParsedTemplate} from '../view/template';
 import {DefinitionMap} from '../view/util';
 
-import {R3DeclareComponentMetadata, R3DeclareUsedDirectiveMetadata, R3DeclareUsedPipeMetadata} from './api';
+import {R3DeclareComponentMetadata, R3DeclareUsedDirectiveMetadata, R3DeclareUsedNgModuleMetadata, R3DeclareUsedPipeMetadata} from './api';
 import {createDirectiveDefinitionMap} from './directive';
 import {toOptionalLiteralArray} from './util';
 
@@ -173,6 +173,12 @@ function compileUsedDependenciesMetadata(meta: R3ComponentMetadata<R3TemplateDep
         pipeMeta.set('type', wrapType(decl.type));
         pipeMeta.set('name', o.literal(decl.name));
         return pipeMeta.toLiteralMap();
+      case R3TemplateDependencyKind.NgModule:
+        const ngModuleMeta = new DefinitionMap<R3DeclareUsedNgModuleMetadata>();
+        ngModuleMeta.set('kind', o.literal('pipe'));
+        ngModuleMeta.set('type', wrapType(decl.type));
+        // TODO: implement this.
+        return ngModuleMeta.toLiteralMap();
     }
   });
 }

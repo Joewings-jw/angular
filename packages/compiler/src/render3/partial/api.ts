@@ -205,7 +205,7 @@ export interface R3DeclareComponentMetadata extends R3DeclareDirectiveMetadata {
 }
 
 export type R3DeclareUsedDependencyMetadata =
-    R3DeclareUsedDirectiveMetadata|R3DeclareUsedPipeMetadata;
+    R3DeclareUsedDirectiveMetadata|R3DeclareUsedPipeMetadata|R3DeclareUsedNgModuleMetadata;
 
 export interface R3DeclareUsedDirectiveMetadata {
   kind: 'directive'|'component';
@@ -246,6 +246,12 @@ export interface R3DeclareUsedPipeMetadata {
    * Reference to the pipe class (possibly a forward reference wrapped in a `forwardRef`
    * invocation).
    */
+  type: o.Expression|(() => o.Expression);
+}
+
+export interface R3DeclareUsedNgModuleMetadata {
+  kind: 'ngmodule';
+
   type: o.Expression|(() => o.Expression);
 }
 

@@ -225,7 +225,7 @@ export interface R3DeclareComponentFacade extends R3DeclareDirectiveFacade {
 
 export type R3DeclareUsedDependencyFacade = {
   kind: string
-}&(R3DeclareUsedDirectiveFacade|R3DeclareUsedPipeFacade);
+}&(R3DeclareUsedDirectiveFacade|R3DeclareUsedPipeFacade|R3DeclareUsedNgModuleFacade);
 
 export interface R3DeclareUsedDirectiveFacade {
   kind?: 'directive'|'component';
@@ -242,9 +242,15 @@ export interface R3DeclareUsedPipeFacade {
   type: OpaqueValue|(() => OpaqueValue);
 }
 
+export interface R3DeclareUsedNgModuleFacade {
+  kind: 'ngmodule';
+  type: OpaqueValue|(() => OpaqueValue);
+}
+
 export enum R3TemplateDependencyKind {
   Directive = 0,
   Pipe = 1,
+  NgModule = 2,
 }
 
 export interface R3TemplateDependencyFacade {
